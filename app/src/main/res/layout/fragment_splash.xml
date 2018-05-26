@@ -12,5 +12,4 @@
         android:layout_height="wrap_content"
         android:src="@drawable/splash"
         android:layout_gravity="center"/>
-
 </FrameLayout>

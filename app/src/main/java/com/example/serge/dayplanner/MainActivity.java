@@ -1,17 +1,24 @@
 package com.example.serge.dayplanner;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import com.example.serge.dayplanner.adapter.TabAdapter;
+import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
 import com.example.serge.dayplanner.fragment.SplashFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements AddingTaskDialogFragment.AddingTaskListener{
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
 
@@ -22,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
-        fragmentManager = getSupportFragmentManager();
+        fragmentManager = getFragmentManager();
 
         runSplash();
 
@@ -98,5 +105,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment addingTaskDialogFragment = new AddingTaskDialogFragment();
+                addingTaskDialogFragment.show(fragmentManager, "AddingTaskDialogFragment");
+
+            }
+        });
+    }
+
+    @Override
+    public void onTaskAdded() {
+        Toast.makeText(this, "Task added.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTaskAddingCancel() {
+        Toast.makeText(this, "Task adding cancel.", Toast.LENGTH_LONG).show();
     }
 }

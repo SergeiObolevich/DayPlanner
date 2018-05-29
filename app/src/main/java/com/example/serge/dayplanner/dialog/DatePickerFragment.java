@@ -8,13 +8,11 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-public class DataPickerFragment extends DialogFragment
+public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);

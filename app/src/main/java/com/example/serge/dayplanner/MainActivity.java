@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.serge.dayplanner.adapter.TabAdapter;
 import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
 import com.example.serge.dayplanner.fragment.SplashFragment;
+import com.example.serge.dayplanner.model.ModelTask;
 
 public class MainActivity extends AppCompatActivity
         implements AddingTaskDialogFragment.AddingTaskListener{
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskAdded() {
+    public void onTaskAdded(ModelTask newTask) {
         Toast.makeText(this, "Task added.", Toast.LENGTH_LONG).show();
     }
 

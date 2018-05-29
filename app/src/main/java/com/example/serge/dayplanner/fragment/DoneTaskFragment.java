@@ -33,7 +33,7 @@ public class DoneTaskFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity());
 
-        rvDoneTask.setLayoutManager(layoutManager);
+        //rvDoneTask.setLayoutManager(layoutManager);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_done_task, container, false);
     }

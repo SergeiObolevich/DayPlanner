@@ -2,11 +2,15 @@ package com.example.serge.dayplanner.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.serge.dayplanner.R;
+import com.example.serge.dayplanner.Utils;
 import com.example.serge.dayplanner.model.Item;
+import com.example.serge.dayplanner.model.ModelTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +38,36 @@ public class CurrentTasksAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        switch (viewType) {
+            case TYPE_TASK: {
+                View v = LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.model_task, viewGroup, false);
+                TextView title = v.findViewById(R.id.tvTaskTitle);
+                TextView date = v.findViewById(R.id.tvTaskDate);
+
+                return new TaskViewHolder(v, title, date);
+            }
+            default: {
+                return null;
+            }
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+        Item item = items.get(position);
 
+        if(item.isTask()) {
+            viewHolder.itemView.setEnabled(true);
+            ModelTask task = (ModelTask) item;
+            TaskViewHolder taskViewHolder = (TaskViewHolder) viewHolder;
+
+            taskViewHolder.title.setText(task.getTitle());
+            if(task.getDate() != 0) {
+                taskViewHolder.date.setText(Utils.getFullDate(task.getDate()));
+            }
+        }
     }
 
     @Override

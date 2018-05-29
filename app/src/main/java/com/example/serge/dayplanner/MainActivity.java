@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.serge.dayplanner.adapter.TabAdapter;
 import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
+import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
+import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 import com.example.serge.dayplanner.fragment.SplashFragment;
 import com.example.serge.dayplanner.model.ModelTask;
 
@@ -22,6 +24,10 @@ public class MainActivity extends AppCompatActivity
         implements AddingTaskDialogFragment.AddingTaskListener{
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
+    TabAdapter tabAdapter;
+
+    CurrentTaskFragment currentTaskFragment;
+    DoneTaskFragment doneTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText(R.string.done_task));
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        TabAdapter tabAdapter = new TabAdapter(fragmentManager, 2);
+        tabAdapter = new TabAdapter(fragmentManager, 2);
 
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -107,6 +113,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENT_TASK_FRAGMENT_POSITION);
+        doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENT_POSITION);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +129,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTaskAdded(ModelTask newTask) {
-        Toast.makeText(this, "Task added.", Toast.LENGTH_LONG).show();
+       currentTaskFragment.addTask(newTask);
     }
 
     @Override

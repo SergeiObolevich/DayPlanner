@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -26,6 +25,7 @@ import com.example.serge.dayplanner.model.ModelTask;
 
 import java.util.Calendar;
 
+@SuppressWarnings("ValidFragment")
 public class AddingTaskDialogFragment extends DialogFragment {
     private AddingTaskListener addingTaskListener;
     public interface AddingTaskListener {

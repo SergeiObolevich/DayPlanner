@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.serge.dayplanner.adapter.TabAdapter;
+import com.example.serge.dayplanner.database.DBHelper;
 import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
 import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
 import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 import com.example.serge.dayplanner.fragment.SplashFragment;
+import com.example.serge.dayplanner.fragment.TaskFragment;
 import com.example.serge.dayplanner.model.ModelTask;
 
 public class MainActivity extends AppCompatActivity
@@ -26,8 +28,10 @@ public class MainActivity extends AppCompatActivity
     PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;
 
-    CurrentTaskFragment currentTaskFragment;
-    DoneTaskFragment doneTaskFragment;
+    TaskFragment currentTaskFragment;
+    TaskFragment doneTaskFragment;
+
+    public DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity
 
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
+
+        dbHelper = new DBHelper(getApplicationContext());
+
         fragmentManager = getFragmentManager();
 
         runSplash();
@@ -129,11 +136,19 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTaskAdded(ModelTask newTask) {
-       currentTaskFragment.addTask(newTask);
+       currentTaskFragment.addTask(newTask, true);
     }
 
     @Override
     public void onTaskAddingCancel() {
         Toast.makeText(this, "Task adding cancel.", Toast.LENGTH_LONG).show();
+    }
+
+    public void onTaskDone(ModelTask task) {
+        doneTaskFragment.addTask(task, false);
+    }
+
+    public void onTaskRestore(ModelTask task) {
+        currentTaskFragment.addTask(task,false);
     }
 }

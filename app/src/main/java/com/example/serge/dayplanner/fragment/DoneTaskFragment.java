@@ -14,22 +14,17 @@ import com.example.serge.dayplanner.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoneTaskFragment extends Fragment {
-
-    private RecyclerView rvDoneTask;
-    private RecyclerView.LayoutManager layoutManager;
-
+public class DoneTaskFragment extends TaskFragment {
     public DoneTaskFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_current_task, container, false);
 
-        rvDoneTask = rootView.findViewById(R.id.rvDoneTasks);
+        recyclerView = rootView.findViewById(R.id.rvDoneTasks);
 
         layoutManager = new LinearLayoutManager(getActivity());
 
@@ -37,5 +32,4 @@ public class DoneTaskFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_done_task, container, false);
     }
-
 }

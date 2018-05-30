@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -56,5 +57,14 @@
                 android:focusableInTouchMode="false"
                 android:cursorVisible="false"/>
         </android.support.design.widget.TextInputLayout>
+        
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spDialogTaskPriority"
+            android:layout_below="@+id/tilDialogTaskDate"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 </ScrollView>

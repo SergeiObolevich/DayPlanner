@@ -31,6 +31,7 @@ public class DoneTaskFragment extends TaskFragment {
         super.onAttach(activity);
         try {
             onTaskRestoreListener = (OnTaskRestoreListener) activity;
+            return;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnTaskRestoreListener");

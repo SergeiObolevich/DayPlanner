@@ -23,7 +23,8 @@ import com.example.serge.dayplanner.fragment.TaskFragment;
 import com.example.serge.dayplanner.model.ModelTask;
 
 public class MainActivity extends AppCompatActivity
-        implements AddingTaskDialogFragment.AddingTaskListener{
+        implements AddingTaskDialogFragment.AddingTaskListener,
+        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener {
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;

@@ -143,6 +143,7 @@ public class DoneTaskAdapter extends TaskAdapter {
 
                         }
                     });
+                    flipIn.start();
                 }
             });
         }

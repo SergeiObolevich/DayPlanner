@@ -144,6 +144,7 @@ public class CurrentTasksAdapter extends TaskAdapter {
 
                         }
                     });
+                    flipIn.start();
                 }
             });
         }

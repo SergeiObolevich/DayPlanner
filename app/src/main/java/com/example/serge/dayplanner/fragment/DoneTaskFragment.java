@@ -56,6 +56,11 @@ public class DoneTaskFragment extends TaskFragment {
     }
 
     @Override
+    public void findTasks(String title) {
+
+    }
+
+    @Override
     public void addTaskFromDB() {
         List<ModelTask> tasks = new ArrayList<>();
         tasks.addAll(activity.dbHelper.query().getTasks(DBHelper.SELECTION_STATUS,

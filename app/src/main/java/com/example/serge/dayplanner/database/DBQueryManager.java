@@ -3,6 +3,7 @@ package com.example.serge.dayplanner.database;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 import com.example.serge.dayplanner.model.ModelTask;
 
 import java.util.ArrayList;
@@ -13,6 +14,24 @@ public class DBQueryManager {
 
     DBQueryManager(SQLiteDatabase database) {
         this.database = database;
+    }
+
+    public ModelTask getTask(long timeStamp) {
+        ModelTask modelTask = null;
+        Cursor cursor = database.query(DBHelper.TASKS_TABLE, null, DBHelper.SELECTION_TIME_STAMP,
+                new String[]{Long.toString(timeStamp)}, null, null, null);
+
+        if(cursor.moveToFirst()) {
+            String title = cursor.getString(cursor.getColumnIndex(DBHelper.TASK_TITLE_COLUMN));
+            long date = cursor.getLong(cursor.getColumnIndex(DBHelper.TASK_DATE_COLUMN));
+            int priority = cursor.getInt(cursor.getColumnIndex(DBHelper.TASK_PRIORITY_COLUMN));
+            int status = cursor.getInt(cursor.getColumnIndex(DBHelper.TASK_STATUS_COLUMN));
+
+            modelTask = new ModelTask(title, date, priority, status, timeStamp);
+        }
+        cursor.close();
+
+        return modelTask;
     }
 
     public List<ModelTask> getTasks(String selection, String[] selectionArgs, String orderBy){

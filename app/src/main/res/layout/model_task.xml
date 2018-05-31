@@ -37,5 +37,4 @@
             android:layout_marginTop="8dp"
             android:src="@color/colorPrimary" />
     </RelativeLayout>
-
 </RelativeLayout>

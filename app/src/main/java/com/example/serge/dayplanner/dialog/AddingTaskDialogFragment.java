@@ -28,6 +28,7 @@ import java.util.Calendar;
 @SuppressWarnings("ValidFragment")
 public class AddingTaskDialogFragment extends DialogFragment {
     private AddingTaskListener addingTaskListener;
+
     public interface AddingTaskListener {
         void onTaskAdded(ModelTask newTask);
         void onTaskAddingCancel();

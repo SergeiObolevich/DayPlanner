@@ -82,5 +82,4 @@ public class CurrentTaskFragment extends TaskFragment {
     public void moveTask(ModelTask task) {
         onTaskDoneListener.onTaskDone(task);
     }
-
 }

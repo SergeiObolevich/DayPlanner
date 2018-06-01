@@ -13,6 +13,7 @@ import com.example.serge.dayplanner.MainActivity;
 import com.example.serge.dayplanner.R;
 import com.example.serge.dayplanner.adapter.CurrentTasksAdapter;
 import com.example.serge.dayplanner.adapter.TaskAdapter;
+import com.example.serge.dayplanner.alarm.AlarmHelper;
 import com.example.serge.dayplanner.database.DBHelper;
 import com.example.serge.dayplanner.model.Item;
 import com.example.serge.dayplanner.model.ModelTask;
@@ -23,6 +24,7 @@ public abstract class TaskFragment extends Fragment{
     protected TaskAdapter adapter;
 
     public MainActivity activity;
+    public AlarmHelper alarmHelper;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public abstract class TaskFragment extends Fragment{
         if(getActivity() != null) {
             activity = (MainActivity) getActivity();
         }
+        alarmHelper = AlarmHelper.getInstance();
 
         addTaskFromDB();
     }
@@ -96,6 +99,7 @@ public abstract class TaskFragment extends Fragment{
                         @Override
                         public void onViewDetachedFromWindow(View v) {
                             if(isRemoved[0]) {
+                                alarmHelper.removeAlarm(timeStamp);
                                 activity.dbHelper.removeTask(timeStamp);
                             }
                         }

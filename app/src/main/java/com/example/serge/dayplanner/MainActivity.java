@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.serge.dayplanner.adapter.TabAdapter;
+import com.example.serge.dayplanner.alarm.AlarmHelper;
 import com.example.serge.dayplanner.database.DBHelper;
 import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
 import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity
 
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
+
+        AlarmHelper.getInstance().init(getApplicationContext());
 
         dbHelper = new DBHelper(getApplicationContext());
 

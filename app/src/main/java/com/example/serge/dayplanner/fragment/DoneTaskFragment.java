@@ -79,6 +79,32 @@ public class DoneTaskFragment extends TaskFragment {
     }
 
     @Override
+    public void addTask(ModelTask newTask, boolean saveToDB) {
+        int position = -1;
+
+        for(int i = 0; i < adapter.getItemCount(); i++) {
+            if(adapter.getItem(i).isTask()) {
+                ModelTask task = (ModelTask) adapter.getItem(i);
+                if(newTask.getDate() < task.getDate()) {
+                    position = i;
+                    break;
+                }
+            }
+        }
+
+        if(position != -1) {
+            adapter.addItem(position, newTask);
+        }
+        else {
+            adapter.addItem(newTask);
+        }
+
+        if (saveToDB) {
+            activity.dbHelper.saveTask(newTask);
+        }
+    }
+
+    @Override
     public void moveTask(ModelTask task) {
         if(task.getDate() != 0) {
             alarmHelper.setAlarm(task);

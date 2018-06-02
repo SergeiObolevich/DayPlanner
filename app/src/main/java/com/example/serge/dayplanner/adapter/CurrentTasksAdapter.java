@@ -16,7 +16,10 @@ import com.example.serge.dayplanner.R;
 import com.example.serge.dayplanner.Utils;
 import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
 import com.example.serge.dayplanner.model.Item;
+import com.example.serge.dayplanner.model.ModelSeparator;
 import com.example.serge.dayplanner.model.ModelTask;
+
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,7 +41,15 @@ public class CurrentTasksAdapter extends TaskAdapter {
                 TextView title = v.findViewById(R.id.tvTaskTitle);
                 TextView date = v.findViewById(R.id.tvTaskDate);
                 CircleImageView priority =  v.findViewById(R.id.cvTaskPriority);
+
                 return new TaskViewHolder(v, title, date, priority);
+            }
+            case TYPE_SEPARATOR: {
+                View separator = LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.model_separator,viewGroup, false);
+                TextView type = separator.findViewById(R.id.tvSeparatorName);
+
+                return new SeparatorViewHolder(separator, type);
             }
             default: {
                 return null;
@@ -50,13 +61,14 @@ public class CurrentTasksAdapter extends TaskAdapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Item item = items.get(position);
 
+        final Resources resources = viewHolder.itemView.getResources();
+
         if(item.isTask()) {
             viewHolder.itemView.setEnabled(true);
             final ModelTask task = (ModelTask) item;
             final TaskViewHolder taskViewHolder = (TaskViewHolder) viewHolder;
 
             final View itemView = taskViewHolder.itemView;
-            final Resources resources = itemView.getResources();
 
             taskViewHolder.title.setText(task.getTitle());
             if(task.getDate() != 0) {
@@ -69,12 +81,24 @@ public class CurrentTasksAdapter extends TaskAdapter {
             itemView.setVisibility(View.VISIBLE);
             taskViewHolder.priority.setEnabled(true);
 
-            itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
+            if(task.getDate() != 0 && task.getDate() < Calendar.getInstance().getTimeInMillis()) {
+                itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
+            }
+            else {
+                itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
+            }
 
             taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_default_material_light));
             taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
             taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
             taskViewHolder.priority.setImageResource(R.drawable.ic_checkbox_blank_circle_white_48dp);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getTaskFragment().showEditTaskDialog(task);
+                }
+            });
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -119,7 +143,7 @@ public class CurrentTasksAdapter extends TaskAdapter {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(itemView,
                                         "translationX", 0f, itemView.getWidth());
 
-                                ObjectAnimator translationBack = ObjectAnimator.ofFloat(itemView,
+                                ObjectAnimator translationXBack = ObjectAnimator.ofFloat(itemView,
                                         "translationX", itemView.getWidth(), 0f);
 
                                 translationX.addListener(new Animator.AnimatorListener() {
@@ -146,7 +170,7 @@ public class CurrentTasksAdapter extends TaskAdapter {
                                     }
                                 });
                                 AnimatorSet translationSet = new AnimatorSet();
-                                translationSet.play(translationX).before(translationBack);
+                                translationSet.play(translationX).before(translationXBack);
                                 translationSet.start();
                             }
                         }
@@ -164,6 +188,12 @@ public class CurrentTasksAdapter extends TaskAdapter {
                     flipIn.start();
                 }
             });
+        }
+        else {
+            ModelSeparator separator = (ModelSeparator) item;
+            SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder) viewHolder;
+
+            separatorViewHolder.type.setText(resources.getString(separator.getType()));
         }
     }
 

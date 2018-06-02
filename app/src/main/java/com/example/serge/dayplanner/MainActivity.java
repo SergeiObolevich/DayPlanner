@@ -18,6 +18,7 @@ import com.example.serge.dayplanner.adapter.TabAdapter;
 import com.example.serge.dayplanner.alarm.AlarmHelper;
 import com.example.serge.dayplanner.database.DBHelper;
 import com.example.serge.dayplanner.dialog.AddingTaskDialogFragment;
+import com.example.serge.dayplanner.dialog.EditTaskDialogFragment;
 import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
 import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 import com.example.serge.dayplanner.fragment.SplashFragment;
@@ -26,7 +27,9 @@ import com.example.serge.dayplanner.model.ModelTask;
 
 public class MainActivity extends AppCompatActivity
         implements AddingTaskDialogFragment.AddingTaskListener,
-        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener {
+        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener,
+        EditTaskDialogFragment.EditingTaskListener {
+
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;
@@ -185,5 +188,11 @@ public class MainActivity extends AppCompatActivity
 
     public void onTaskRestore(ModelTask task) {
         currentTaskFragment.addTask(task,false);
+    }
+
+    @Override
+    public void onTaskEdited(ModelTask updateTask) {
+        currentTaskFragment.updateTask(updateTask);
+        dbHelper.update().task(updateTask);
     }
 }

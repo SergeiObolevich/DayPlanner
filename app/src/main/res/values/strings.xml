@@ -7,6 +7,8 @@
     <string name="action_settings">Settings</string>
     <string name="do_not_show_splash">Don\'t show splash</string>
     
+    <string name="dialog_editing_title">Editing task</string>
+
     <string name="dialog_title">Adding task</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
@@ -18,4 +20,9 @@
     <string name="task_title">Title</string>
     <string name="task_data">Data</string>
     <string name="task_time">Time</string>
+    
+    <string name="separator_overdue">Overdue</string>
+    <string name="separator_today">Today</string>
+    <string name="separator_tomorrow">Tomorrow</string>
+    <string name="separator_future">Future</string>
 </resources>

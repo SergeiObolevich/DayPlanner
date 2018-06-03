@@ -7,11 +7,10 @@ import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
 import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 
 public class TabAdapter extends FragmentStatePagerAdapter{
-    private int numberOfTabs;
-
     public static final int CURRENT_TASK_FRAGMENT_POSITION = 0;
     public static final int DONE_TASK_FRAGMENT_POSITION = 1;
 
+    private int numberOfTabs;
     private CurrentTaskFragment currentTaskFragment;
     private DoneTaskFragment doneTaskFragment;
 

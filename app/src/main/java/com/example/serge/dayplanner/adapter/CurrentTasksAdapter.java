@@ -46,7 +46,7 @@ public class CurrentTasksAdapter extends TaskAdapter {
             }
             case TYPE_SEPARATOR: {
                 View separator = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.model_separator,viewGroup, false);
+                        .inflate(R.layout.model_separator, viewGroup, false);
                 TextView type = separator.findViewById(R.id.tvSeparatorName);
 
                 return new SeparatorViewHolder(separator, type);
@@ -93,13 +93,6 @@ public class CurrentTasksAdapter extends TaskAdapter {
             taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
             taskViewHolder.priority.setImageResource(R.drawable.ic_checkbox_blank_circle_white_48dp);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getTaskFragment().showEditTaskDialog(task);
-                }
-            });
-
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -111,6 +104,13 @@ public class CurrentTasksAdapter extends TaskAdapter {
                         }
                     }, 1000);
                     return true;
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getTaskFragment().showEditTaskDialog(task);
                 }
             });
 

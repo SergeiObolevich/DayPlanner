@@ -160,6 +160,14 @@ public class CurrentTaskFragment extends TaskFragment {
     }
 
     @Override
+    public void checkAdapter() {
+        if(adapter == null) {
+            adapter = new CurrentTasksAdapter(this);
+            addTaskFromDB();
+        }
+    }
+
+    @Override
     public void moveTask(ModelTask task) {
         alarmHelper.removeAlarm(task.getTimeStamp());
         onTaskDoneListener.onTaskDone(task);

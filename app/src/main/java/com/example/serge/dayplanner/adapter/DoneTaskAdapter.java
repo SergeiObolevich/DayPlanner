@@ -21,9 +21,6 @@ import com.example.serge.dayplanner.model.ModelTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DoneTaskAdapter extends TaskAdapter {
-    private static final int TYPE_TASK = 0;
-    private static final int TYPE_SEPARATOR = 1;
-
     public DoneTaskAdapter(TaskFragment taskFragment) {
         super(taskFragment);
     }
@@ -31,26 +28,19 @@ public class DoneTaskAdapter extends TaskAdapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        switch (viewType) {
-            case TYPE_TASK: {
-                View v = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.model_task, viewGroup, false);
-                TextView title = v.findViewById(R.id.tvTaskTitle);
-                TextView date = v.findViewById(R.id.tvTaskDate);
-                CircleImageView priority =  v.findViewById(R.id.cvTaskPriority);
-                return new TaskViewHolder(v, title, date, priority);
-            }
-            default: {
-                return null;
-            }
-        }
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.model_task, viewGroup, false);
+        TextView title = v.findViewById(R.id.tvTaskTitle);
+        TextView date = v.findViewById(R.id.tvTaskDate);
+        CircleImageView priority = v.findViewById(R.id.cvTaskPriority);
+        return new TaskViewHolder(v, title, date, priority);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
         final Item item = items.get(position);
 
-        if(item.isTask()) {
+        if (item.isTask()) {
             viewHolder.itemView.setEnabled(true);
             final ModelTask task = (ModelTask) item;
             final TaskViewHolder taskViewHolder = (TaskViewHolder) viewHolder;
@@ -59,10 +49,9 @@ public class DoneTaskAdapter extends TaskAdapter {
             final Resources resources = itemView.getResources();
 
             taskViewHolder.title.setText(task.getTitle());
-            if(task.getDate() != 0) {
+            if (task.getDate() != 0) {
                 taskViewHolder.date.setText(Utils.getFullDate(task.getDate()));
-            }
-            else {
+            } else {
                 taskViewHolder.date.setText(null);
             }
 
@@ -94,7 +83,7 @@ public class DoneTaskAdapter extends TaskAdapter {
                 @Override
                 public void onClick(View v) {
                     taskViewHolder.priority.setEnabled(false);
-                    task.setStatus(ModelTask.STATUS_DONE);
+                    task.setStatus(ModelTask.STATUS_CURRENT);
                     getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(), ModelTask.STATUS_CURRENT);
 
                     itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
@@ -114,7 +103,7 @@ public class DoneTaskAdapter extends TaskAdapter {
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            if(task.getStatus() == ModelTask.STATUS_DONE) {
+                            if (task.getStatus() != ModelTask.STATUS_DONE) {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(itemView,
                                         "translationX", 0f, itemView.getWidth());
 
@@ -163,16 +152,6 @@ public class DoneTaskAdapter extends TaskAdapter {
                     flipIn.start();
                 }
             });
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (getItem(position).isTask()) {
-            return TYPE_TASK;
-        }
-        else {
-            return TYPE_SEPARATOR;
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DayPlanner</string>
+    <string name="app_name">Day Planner</string>
 
     <string name="current_task">Current</string>
     <string name="done_task">Done</string>

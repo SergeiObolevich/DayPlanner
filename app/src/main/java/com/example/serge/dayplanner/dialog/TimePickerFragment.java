@@ -1,6 +1,5 @@
 package com.example.serge.dayplanner.dialog;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;

@@ -31,7 +31,6 @@ public class DoneTaskFragment extends TaskFragment {
         super.onAttach(activity);
         try {
             onTaskRestoreListener = (OnTaskRestoreListener) activity;
-            return;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnTaskRestoreListener");
@@ -51,12 +50,12 @@ public class DoneTaskFragment extends TaskFragment {
         adapter = new DoneTaskAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 
     @Override
     public void findTasks(String title) {
+        checkAdapter();
         adapter.removeAllItems();
         List<ModelTask> tasks = new ArrayList<>();
         tasks.addAll(activity.dbHelper.query().getTasks(DBHelper.SELECTION_LIKE_TITLE + " AND "
@@ -69,6 +68,7 @@ public class DoneTaskFragment extends TaskFragment {
 
     @Override
     public void addTaskFromDB() {
+        checkAdapter();
         adapter.removeAllItems();
         List<ModelTask> tasks = new ArrayList<>();
         tasks.addAll(activity.dbHelper.query().getTasks(DBHelper.SELECTION_STATUS,

@@ -21,7 +21,8 @@ public class AlarmHelper {
 
     public void init(Context context) {
         this.context = context;
-        alarmManager = (AlarmManager) context.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager = (AlarmManager) context.getApplicationContext()
+                .getSystemService(Context.ALARM_SERVICE);
     }
 
     public void setAlarm(ModelTask task) {

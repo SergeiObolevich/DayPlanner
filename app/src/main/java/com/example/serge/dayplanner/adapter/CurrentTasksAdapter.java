@@ -128,7 +128,6 @@ public class CurrentTasksAdapter extends TaskAdapter {
                     taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
 
                     ObjectAnimator flipIn = ObjectAnimator.ofFloat(taskViewHolder.priority, "rotationY", -180f, 0f);
-
                     flipIn.addListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
@@ -192,7 +191,6 @@ public class CurrentTasksAdapter extends TaskAdapter {
         else {
             ModelSeparator separator = (ModelSeparator) item;
             SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder) viewHolder;
-
             separatorViewHolder.type.setText(resources.getString(separator.getType()));
         }
     }

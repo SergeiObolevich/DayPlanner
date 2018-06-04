@@ -2,7 +2,7 @@ package com.example.serge.dayplanner.model;
 
 import com.example.serge.dayplanner.R;
 
-public class ModelSeparator implements Item{
+public class ModelSeparator implements Item {
     public static final int TYPE_OVERDUE = R.string.separator_overdue;
     public static final int TYPE_TODAY = R.string.separator_today;
     public static final int TYPE_TOMORROW = R.string.separator_tomorrow;

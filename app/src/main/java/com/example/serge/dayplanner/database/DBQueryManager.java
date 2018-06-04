@@ -3,7 +3,6 @@ package com.example.serge.dayplanner.database;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 import com.example.serge.dayplanner.model.ModelTask;
 
 import java.util.ArrayList;

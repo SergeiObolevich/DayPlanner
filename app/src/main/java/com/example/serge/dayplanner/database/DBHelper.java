@@ -8,22 +8,22 @@ import android.provider.BaseColumns;
 
 import com.example.serge.dayplanner.model.ModelTask;
 
-public class DBHelper extends SQLiteOpenHelper{
-    public static final int DATABASE_VERSION = 2;
-    public static final String DATABASE_NAME = "day_planner_database";
-    public static final String TASKS_TABLE = "tasks_table";
+public class DBHelper extends SQLiteOpenHelper {
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "day_planner_database";
 
+    public static final String TASKS_TABLE = "tasks_table";
     public static final String TASK_TITLE_COLUMN = "task_title";
     public static final String TASK_DATE_COLUMN = "task_date";
     public static final String TASK_PRIORITY_COLUMN = "task_priority";
     public static final String TASK_STATUS_COLUMN = "task_status";
     public static final String TASK_TIME_STAMP_COLUMN = "task_time_stamp";
 
-    private static final String TASKS_TABLE_CREATE_STRING = "CREATE TABLE "
+    private static final String TASKS_TABLE_CREATE_SCRIPT = "CREATE TABLE "
             + TASKS_TABLE + " (" + BaseColumns._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TASK_TITLE_COLUMN + " TEXT NOT NULL, "
             + TASK_DATE_COLUMN + " LONG, " + TASK_PRIORITY_COLUMN + " INTEGER, "
-            + TASK_STATUS_COLUMN + " INTEGER, " + TASK_TIME_STAMP_COLUMN + " ,LONG);";
+            + TASK_STATUS_COLUMN + " INTEGER, " + TASK_TIME_STAMP_COLUMN + " LONG);";
 
     public static final String SELECTION_STATUS = DBHelper.TASK_STATUS_COLUMN + " = ?";
     public static final String SELECTION_TIME_STAMP = DBHelper.TASK_TIME_STAMP_COLUMN + " = ?";
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TASKS_TABLE_CREATE_STRING);
+        db.execSQL(TASKS_TABLE_CREATE_SCRIPT);
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -86,7 +85,7 @@ public class EditTaskDialogFragment extends DialogFragment {
         final TextInputLayout tilTime = container.findViewById(R.id.tilDialogTaskTime);
         final EditText etTime = tilTime.getEditText();
 
-        Spinner spPriority = (Spinner) container.findViewById(R.id.spDialogTaskPriority) ;
+        Spinner spPriority = container.findViewById(R.id.spDialogTaskPriority) ;
 
         etTitle.setText(task.getTitle());
         etTitle.setSelection(etTitle.length());
@@ -101,7 +100,7 @@ public class EditTaskDialogFragment extends DialogFragment {
 
         builder.setView(container);
 
-        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, ModelTask.PRIORITY_LEVELS);
 
         spPriority.setAdapter(priorityAdapter);
@@ -129,7 +128,6 @@ public class EditTaskDialogFragment extends DialogFragment {
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (etDate.length() == 0) {
                     etDate.setText(" ");
                 }

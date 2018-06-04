@@ -47,7 +47,6 @@ public class AddingTaskDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(R.string.dialog_title);
@@ -65,7 +64,7 @@ public class AddingTaskDialogFragment extends DialogFragment {
         final TextInputLayout tilTime = container.findViewById(R.id.tilDialogTaskTime);
         final EditText etTime = tilTime.getEditText();
 
-        Spinner spPriority = (Spinner) container.findViewById(R.id.spDialogTaskPriority) ;
+        Spinner spPriority = container.findViewById(R.id.spDialogTaskPriority) ;
 
         tilTitle.setHint(getResources().getString(R.string.task_title));
         tilData.setHint(getResources().getString(R.string.task_data));

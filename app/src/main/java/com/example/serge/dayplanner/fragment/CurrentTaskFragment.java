@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CurrentTaskFragment extends TaskFragment {
     public CurrentTaskFragment() {
-        // Required empty public constructor
+
     }
 
     OnTaskDoneListener onTaskDoneListener;
@@ -51,7 +51,6 @@ public class CurrentTaskFragment extends TaskFragment {
         adapter = new CurrentTasksAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 

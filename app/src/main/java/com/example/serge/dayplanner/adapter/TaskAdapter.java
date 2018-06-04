@@ -46,7 +46,7 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
         for(int i = 0; i < getItemCount(); i++) {
             if (getItem(i).isTask()) {
                 ModelTask task = (ModelTask) getItem(i);
-                if(newTask.getTimeStamp() == task. getTimeStamp()) {
+                if(newTask.getTimeStamp() == task.getTimeStamp()) {
                     removeItem(i);
                     getTaskFragment().addTask(newTask, false);
                 }
@@ -77,7 +77,7 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    public void checkSeparator(int type) {
+    private void checkSeparator(int type) {
         switch (type) {
             case ModelSeparator.TYPE_OVERDUE: {
                 containsSeparatorOverdue = false;

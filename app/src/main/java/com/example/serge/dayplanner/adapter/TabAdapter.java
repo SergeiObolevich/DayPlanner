@@ -6,7 +6,7 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import com.example.serge.dayplanner.fragment.CurrentTaskFragment;
 import com.example.serge.dayplanner.fragment.DoneTaskFragment;
 
-public class TabAdapter extends FragmentStatePagerAdapter{
+public class TabAdapter extends FragmentStatePagerAdapter {
     public static final int CURRENT_TASK_FRAGMENT_POSITION = 0;
     public static final int DONE_TASK_FRAGMENT_POSITION = 1;
 

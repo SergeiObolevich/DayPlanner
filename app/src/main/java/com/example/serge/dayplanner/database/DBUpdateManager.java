@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.serge.dayplanner.model.ModelTask;
 
 public class DBUpdateManager {
-    SQLiteDatabase database;
+    private SQLiteDatabase database;
 
     DBUpdateManager(SQLiteDatabase database) {
         this.database = database;

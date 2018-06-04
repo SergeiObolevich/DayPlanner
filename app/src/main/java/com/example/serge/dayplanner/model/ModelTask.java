@@ -5,9 +5,9 @@ import com.example.serge.dayplanner.R;
 import java.util.Date;
 
 public class ModelTask implements Item {
-    public static final int PRIORITY_LOW = 0;
-    public static final int PRIORITY_NORMAL = 1;
-    public static final int PRIORITY_HIGH = 2;
+    private static final int PRIORITY_LOW = 0;
+    private static final int PRIORITY_NORMAL = 1;
+    private static final int PRIORITY_HIGH = 2;
 
     public static final String[] PRIORITY_LEVELS = {"Low Priority", "Normal Priority", "High Priority"};
 
@@ -105,10 +105,6 @@ public class ModelTask implements Item {
 
     public long getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public int getDateStatus() {

@@ -11,13 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 public class SplashFragment extends Fragment {
     public SplashFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         SplashTask splashTask = new SplashTask();
         splashTask.execute();
 
